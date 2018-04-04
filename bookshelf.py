@@ -1,6 +1,15 @@
 # https://www.reddit.com/r/dailyprogrammer/comments/7vm223/20180206_challenge_350_easy_bookshelf_problem/
 
-def bookshelf(books, shelves):
+def bookshelf(filename):
+
+    with open(filename, 'r') as f:
+        shelves = [int(x) for x in next(f).split()]
+        books = 0
+        for line in f:
+            for i in line.split():
+                if i.isdigit():
+                    i = int(i)
+                    books += i
     
     if books > sum(shelves):
         print('impossible')
@@ -23,3 +32,4 @@ def bookshelf(books, shelves):
             minimum, answer = l[i][1], l[i][0]
             
     return answer
+    
