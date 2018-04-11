@@ -1,6 +1,11 @@
 # https://www.reddit.com/r/dailyprogrammer/comments/8bh8dh/20180411_challenge_356_intermediate_goldbachs/
 
-def goldbach_weak_conjecture(n):
+def goldbach_weak_conjecture(*args):
+    
+    for n in args:
+        if n % 2 == 0:
+            print("No even numbers")
+            return -1
     
     def find_primes(n):
         l = []
@@ -15,14 +20,12 @@ def goldbach_weak_conjecture(n):
                 
         return l
     
-    list_of_primes = find_primes(n)
-    sum_list = []
+    for n in args:
+        list_of_primes = find_primes(n)
     
-    for i in range(len(list_of_primes)):
-        for j in range(i, len(list_of_primes)):
-            for k in range(j, len(list_of_primes)):
-                if list_of_primes[i] + list_of_primes[j] + list_of_primes[k] == n:
-                    sum_list.append((list_of_primes[i], list_of_primes[j], list_of_primes[k]))
+        for i in range(len(list_of_primes)):
+            for j in range(i, len(list_of_primes)):
+                for k in range(j, len(list_of_primes)):
+                    if list_of_primes[i] + list_of_primes[j] + list_of_primes[k] == n:
+                        print("{} = {} + {} + {}".format(n, list_of_primes[j], list_of_primes[i], list_of_primes[k]))
                     
-    return sum_list
-
