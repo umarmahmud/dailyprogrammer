@@ -3,8 +3,8 @@
 def goldbach_weak_conjecture(*args):
     
     for n in args:
-        if n % 2 == 0:
-            print("No even numbers")
+        if n % 2 == 0 or n < 6:
+            print("Illegal argument")
             return -1
     
     def find_primes(n):
