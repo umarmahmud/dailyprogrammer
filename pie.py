@@ -40,6 +40,8 @@ def number_of_pies(ingredients):
     max_no_of_pumpkin_pies = get_max_number(available_ingredients, pumpkin_pie_recipie)
     max_no_of_apple_pies = get_max_number(available_ingredients, apple_pie_recipie)
     
+    print(max_no_of_apple_pies)
+    
     if max_no_of_pumpkin_pies > max_no_of_apple_pies:
         majority = 'pumpkin_pies'
         remainder = 'apple_pies'
@@ -50,13 +52,36 @@ def number_of_pies(ingredients):
         # if max numbers are tied
         pass
         
-    # determine number of ingredients we will need
+    # determine number of ingredients we will need (use dictionary comprehension)
     if majority == 'pumpkin_pies':
-        for k, v in pumpkin_pie_recipie.items():
-            v *= max_no_of_pumpkin_pies
-            print(k, v)
-            
-        print(remainder)
-        
-    # subtract values, determine max number of other kind of pie that can be made with remaining ingredients
+        new_dict = {k:v*max_no_of_pumpkin_pies for (k, v) in pumpkin_pie_recipie.items()}
+    if majority == 'apple_pies':
+        new_dict = {k:v*max_no_of_apple_pies for (k, v) in apple_pie_recipie.items()}
     
+    print(available_ingredients)
+    print(new_dict)
+    
+    subtracted_values = list(zip(available_ingredients.values(), new_dict.values()))
+    
+    print(subtracted_values)
+    
+    sub_list = []
+    
+    for i in range(len(subtracted_values)):
+        for j in range(1):
+            sub_list.append(subtracted_values[i][j] - subtracted_values[i][j + 1])
+            
+    print(sub_list)
+    
+    sub_list = dict(zip(available_ingredients, sub_list))
+    
+    print(sub_list)
+    
+    if majority == 'pumpkin_pies':
+        a = get_max_number(sub_list, pumpkin_pie_recipie)
+        print('{} pumpkin pies and {} apple pies'.format(max_no_of_pumpkin_pies, a))
+    if majority == 'apple_pies':
+        b = get_max_number(sub_list, apple_pie_recipie)
+        print('{} apple pies and {} pumpkin pies'.format(max_no_of_apple_pies, b))
+    
+    print(a)
